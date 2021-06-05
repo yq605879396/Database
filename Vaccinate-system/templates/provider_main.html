@@ -1,0 +1,230 @@
+<!doctype html>
+<html lang="en" class="no-js">
+<head>
+    
+<META HTTP-EQUIV="pragma" CONTENT="no-cache">
+<META HTTP-EQUIV="Cache-Control" CONTENT="no-cache, must-revalidate">
+<META HTTP-EQUIV="expires" CONTENT="Wed, 26 Feb 1997 08:21:57 GMT">
+<META HTTP-EQUIV="expires" CONTENT="0">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!--front style -->
+    <link href="https://fonts.googleapis.com/css2?family=Nunito:ital,wght@0,400;1,900&display=swap" rel="stylesheet">
+    <!-- custom style -->
+    <link rel="stylesheet" href="../static/css/reset.css"> <!-- CSS reset -->
+    <link rel="stylesheet" href="../static/css/style.css"> <!-- Resource style: body, html, navi -->
+    <link rel="stylesheet" href="../static/css/main.css"> <!-- some style for this page -->
+
+    <script src="../static/js/modernizr.js"></script> <!-- Modernizr -->
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+    <title>Vaccine</title>
+
+
+</head>
+
+
+<bodyonload="start()">
+
+<!-- navi -->
+<nav class="cd-vertical-nav">
+    <ul>
+        <li><a href="#section1" class="active"><span class="label">Home</span></a></li>
+        <li><a href="#section2"><span class="label">Information</span></a></li>
+        <li><a href="#section3"><span class="label">Appointments</span></a></li>
+        <li><a href="#section4"><span class="label">Contact</span></a></li>
+
+    </ul>
+</nav>
+
+<button class="cd-nav-trigger cd-image-replace">Open navigation<span aria-hidden="true"></span></button>
+
+
+<!-- Welcome provider-->
+<section id="section1" class="cd-section">
+    <div class="content-wrapper">
+        <h2>Home Page</h2>
+        <p>Welcome {{ provider_data.pvname }}, you've successfully logged in!</p></br>
+
+    </div>
+</section>
+
+
+<!-- Provider information -->
+<section id="section2" class="cd-section">
+    <div class="content-wrapper">
+        
+        </br></br></br><h2>Information</h2>
+
+        <div class = "left">
+            </br>
+            <h3>&#12336;&#12336;&#12336;&#12336;&#12336;&#12336;&#12336; Provider Information &#12336;&#12336;&#12336;&#12336;&#12336;&#12336;&#12336;</h3></br>
+            <table boder = "5"  cellpadding="10" cellspacing="100" front = 20px style="width: 75%;margin:auto; border-collapse:separate; border-spacing:0px 10px;">
+                <tr ><td style="width: 304px;"> Provider Name: </td><td>{{ provider_data.pvname }}</td></tr>
+                <tr ><td style="width: 304px;"> Address: </td><td>{{provider_data.pvaddress}}</td></tr>
+                <tr ><td style="width: 304px;"> Phone: </td><td>{{provider_data.pvphone}}</td></tr>
+                <tr ><td style="width: 304px;"> Type: </td><td>{{provider_data.pvtype}}</td></tr>
+                <tr ><td style="width: 304px;"> location - x coordinate: </td><td>{{provider_data.pvx}}</td></tr>
+                <tr ><td style="width: 304px;"> location - y coordinate: </td><td>{{provider_data.pvy}}</td></tr>
+            </table>
+        </div>
+
+        <div class="right">
+            </br>
+            <h3>&#12336;&#12336;&#12336;&#12336;&#12336;&#12336;&#12336;&#12336;&#12336;&#12336; Appointment Summary &#12336;&#12336;&#12336;&#12336;&#12336;&#12336;&#12336;&#12336;</h3></br>
+            <table boder = "5"  cellpadding="10" cellspacing="100" front = 20px style="margin-left: -50px; width: 80%;margin:auto; border-collapse:separate; border-spacing:0px 10px;">
+                <tr ><td style="width: 304px;"> Total appointment number &#10024;: </td>             <td style="width:354px;">{{ provider_data.ava_num }}</td></tr>
+                <tr ><td style="width: 304px;text-align:right"> Finished appointment &#127774;: </td><td style="width:354px;">{{provider_data.ava_fin}}</td></tr>
+                <tr ><td style="width: 304px;text-align:right"> vaccinated: </td>                    <td style="width:354px;">{{provider_data.ava_fin_yes}}</td></tr>
+                <tr ><td style="width: 304px;text-align:right"> expired(didn't show/decline): </td>  <td style="width:354px;">{{provider_data.ava_fin_no}}</td></tr>
+                <tr ><td style="width: 304px;text-align:right"> Upcomming appointments &#8987;: </td><td style="width:354px;">{{provider_data.ava_up}}</td></tr>
+                <tr ><td style="width: 304px;text-align:right"> accepted: </td>                      <td style="width:354px;">{{provider_data.ava_up_acc}}</td></tr>
+                <tr ><td style="width: 304px;text-align:right"> pending: </td>                       <td style="width:354px;">{{provider_data.ava_up_pend}}</td></tr>                    
+            </table>
+        </div>
+        </br></br>
+    </div>
+</section>
+
+
+<!-- Provider appointment information -->
+<section id="section3" class="cd-section">
+    <div class="content-wrapper">
+        
+        </br></br></br></br><h2>Upcomming Appointment</h2></br></br>
+
+        <table boder = "5"  cellpadding="10" cellspacing="100" front = 10px  style="width: 80%;margin:auto; border-collapse:separate; border-spacing:0px 10px;">
+            <tr >
+                <th style="width: 100px;">APID</th>
+                <th style="width: 130px;">Date</th>
+                <th style="width: 130px;">Time</th>
+                <th style="width: 130px;">Status</th>
+                <th style="width: 130px;">Matched SSN</th>
+                <th style="width: 130px;">Matched Name</th>
+                <th style="width: 130px;">Offer Date</th>
+                <th style="width: 130px;">Reply Date</th>
+                <th style="width: 20px; text-align:left;"> &#x2728; </th>
+            </tr>
+        </table>
+
+        <div style="max-height: 600px; min-height: 300px; overflow-y: scroll;">
+            <table boder = "5"  cellpadding="10" cellspacing="100" front = 10px  style="width: 80%;margin:auto; border-collapse:separate; border-spacing:0px 10px;">
+            <tr >
+                <th style="width: 100px;"></th>
+                <th style="width: 130px;"></th>
+                <th style="width: 130px;"></th>
+                <th style="width: 130px;"></th>
+                <th style="width: 130px;"></th>
+                <th style="width: 130px;"></th>
+                <th style="width: 130px;"></th>
+                <th style="width: 130px;"></th>
+                <th style="width: 20px; text-align:left;"> </th>
+            </tr>
+            {% if provider_data.fut_ava %}
+                {% for match in provider_data.fut_ava %}
+                <tr>
+                    {% for attr in ['apid', 'date(`date`)', 'time', 'status', 'SSN', 'pname','date(`offerdt`)', 'date(`replydt`)'] %}
+                        {%if attr == 'status' and match[attr] == None%} 
+                            {%if match['SSN'] == None%}
+                                <td>Unmatched</td>
+                            {%else%}
+                                <td>Waiting Response</td>
+                            {%endif%}
+                        {%else%}
+                            {%if match[attr] == None%}
+                                <td>&#128173;</td>
+                            {%else%}
+                                <td>{{match[attr]}}</td>
+                            {%endif%}
+                        {%endif%}
+                    {% endfor %}
+                </tr>
+                {% endfor %}
+            {%endif%}
+            </table>
+        </div>
+
+        </br></br>
+        <form method="POST" action=''>
+            <table boder = "5"  cellpadding="20" cellspacing="20" style="width: 65%;margin:auto; border-collapse:separate; border-spacing:0px 10px;">
+            <tr>
+                <td style="width: 300px;">New Appointment &#127775; </td>
+                <td style="width: 200px;" front = 20px>Date: </td><td><input type="text" name="new_date" value="YYYY-MM-DD"> &nbsp; &nbsp;  </td>
+                <td style="width: 200px;">Time: </td><td><input type="text" name="new_time" value="HH:MM AM/PM"> </td>
+                <td style="width: 300px;"><input class="button button2" type="submit" value="Add"><td>
+            </tr>
+            </table>
+
+            </br>
+            {% with messages = get_flashed_messages() %}
+            {% if messages %}
+            <ul class="flashes">
+               {% for message in messages %}
+                <div class="message_flash">{{ message }}</div>
+               {% endfor %}
+            </ul>
+            {% endif %}
+            {% endwith %} 
+        </form>
+        
+        </br></br>
+    
+    </div>
+</section>
+
+
+<!-- Provider information -->
+<section id="section3" class="cd-section">
+    <div class="content-wrapper">
+        
+        </br></br></br></br><h2>History Appotionment</h2>
+
+        <table boder = "5"  cellpadding="10" cellspacing="100" front = 10px  style="width: 60%;margin:auto; border-collapse:separate; border-spacing:0px 10px;">
+            <tr >
+                <th style="width: 100px;">APID</th>
+                <th style="width: 230px;">Date</th>
+                <th style="width: 230px;">Time</th>
+                <th style="width: 230px;">Offer Date</th>
+                <th style="width: 230px;">Final Status</th>
+                <th style="width: 120px; text-align:left;"> &#x2728; </th>
+            </tr>
+        </table>
+            
+        <div style="max-height: 400px;min-height: 400px; overflow-y: scroll;">
+            <table boder = "5"  cellpadding="10" cellspacing="100" front = 10px  style="width: 60%;margin:auto; border-collapse:separate; border-spacing:0px 10px;">
+            <tr >
+                <th style="width: 100px;"></th>
+                <th style="width: 230px;"></th>
+                <th style="width: 230px;"></th>
+                <th style="width: 230px;"></th>
+                <th style="width: 230px;"></th>
+                <th style="width: 120px; text-align:left;"> </th>
+            </tr>
+            {% if provider_data.past_ava %}
+                {% for match in provider_data.past_ava %}
+                <tr>
+                    {% for attr in ['apid', 'date(`date`)', 'time', 'date(`offerdt`)', 'status'] %}
+                        <td>{{match[attr]}}</td>
+                    {% endfor %}
+                </tr>
+                {% endfor %}
+            {%endif%}
+            </table>
+        </div>
+        </br></br>
+    </div>
+</section>
+
+
+<!-- feed back -->
+<section id="section4" class="cd-section">
+	<div class="content-wrapper">
+		<h2>Contact</h2>
+		<p> Thank you for choosing our platform.</p>
+    <p>   Tel &#128222;:3472044355  &nbsp;&nbsp;&nbsp;   Email &#128231;: contact@gmail.com</p>
+    </div>
+</section>
+
+    
+</body>
+</html>

@@ -1,0 +1,83 @@
+<!doctype html>
+<html lang="en" class="no-js">
+<head>
+    
+<META HTTP-EQUIV="pragma" CONTENT="no-cache">
+<META HTTP-EQUIV="Cache-Control" CONTENT="no-cache, must-revalidate">
+<META HTTP-EQUIV="expires" CONTENT="Wed, 26 Feb 1997 08:21:57 GMT">
+<META HTTP-EQUIV="expires" CONTENT="0">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!--front style -->
+    <link href="https://fonts.googleapis.com/css2?family=Nunito:ital,wght@0,400;1,900&display=swap" rel="stylesheet">
+    <!-- custom style -->
+    <link rel="stylesheet" href="../static/css/reset.css"> <!-- CSS reset -->
+    <link rel="stylesheet" href="../static/css/style.css"> <!-- Resource style: body, html, navi -->
+    <link rel="stylesheet" href="../static/css/main.css"> <!-- some style for this page -->
+
+    <script src="../static/js/modernizr.js"></script> <!-- Modernizr -->
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+    <title>Vaccine System</title>
+
+
+</head>
+
+
+<body>
+
+<!-- navi -->
+<nav class="cd-vertical-nav">
+    <ul>
+        <li><a href="#section1" class="active"><span class="label">Register</span></a></li>
+
+    </ul>
+</nav>
+
+<button class="cd-nav-trigger cd-image-replace">Open navigation<span aria-hidden="true"></span></button>
+
+<!-- input patient information -->
+<section id="section1" class="cd-section">
+    <div class="content-wrapper">
+        <h2>Provider Registration</h2> </br></br></br>
+
+        <form method="POST" action=''>
+            <table boder = "5"  cellpadding="10" cellspacing="10" style="width: 30%;margin:auto; border-collapse:separate; border-spacing:0px 10px;">
+            <tr><td>Name:</td><td><input type="text" name="pvname" value=""></td></tr>
+            <tr><td>Address：</td><td><input type="text" name="pvaddress" value=""></td></tr>
+            <tr><td>Phone(username): </td><td><input type="text" name="pvphone" value="XXX-XXX-XXXX"> </td></tr>
+            <tr><td>Password: </td><td><input type="text" name="ppassword" value=""> </td></tr>
+            <tr><td>Type: </td><td><input type="text" name="type" value=""></td></tr>
+            <tr><td>Location - px: </td><td><input type="text" name="pvx" value=""> </td></tr>
+            <tr><td>Locatioj - py: </td><td><input type="text" name="pvy" value=""> </td></tr>
+            </table>
+        </br>
+    
+        {% with messages = get_flashed_messages() %}
+        {% if messages %}
+        <ul class="flashes">
+           {% for message in messages %}
+            <div class="message_flash">{{ message }}</div>
+           {% endfor %}
+        </ul>
+        {% endif %}
+        {% endwith %} 
+        </br></br>
+        <input class="button button2" type="submit" value="Submit">
+        </form>
+    </div>
+
+</section>
+
+
+
+    
+</body>
+</html>
+
+
+
+
+
+
+

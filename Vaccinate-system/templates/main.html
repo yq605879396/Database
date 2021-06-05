@@ -1,0 +1,377 @@
+<!doctype html>
+<html lang="en" class="no-js">
+<head>
+    
+<META HTTP-EQUIV="pragma" CONTENT="no-cache">
+<META HTTP-EQUIV="Cache-Control" CONTENT="no-cache, must-revalidate">
+<META HTTP-EQUIV="expires" CONTENT="Wed, 26 Feb 1997 08:21:57 GMT">
+<META HTTP-EQUIV="expires" CONTENT="0">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!--front style -->
+    <link href="https://fonts.googleapis.com/css2?family=Nunito:ital,wght@0,400;1,900&display=swap" rel="stylesheet">
+    <!-- custom style -->
+    <link rel="stylesheet" href="../static/css/reset.css"> <!-- CSS reset -->
+    <link rel="stylesheet" href="../static/css/style.css"> <!-- Resource style: body, html, navi -->
+    <link rel="stylesheet" href="../static/css/main.css"> <!-- some style for this page -->
+
+    <script src="../static/js/modernizr.js"></script> <!-- Modernizr -->
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+    <title>CapVis</title>
+
+
+</head>
+
+
+<body>
+
+<!-- navi -->
+<nav class="cd-vertical-nav">
+    <ul>
+        <li><a href="#section1" class="active"><span class="label">Get Caption</span></a></li>
+        <li><a href="#section2"><span class="label">Internals</span></a></li>
+        <li><a href="#section3"><span class="label">Analysis</span></a></li>
+        <li><a href="#section4"><span class="label">Transform</span></a></li>
+
+    </ul>
+</nav>
+
+<button class="cd-nav-trigger cd-image-replace">Open navigation<span aria-hidden="true"></span></button>
+
+<!-- show image and caption -->
+<section id="section1" class="cd-section">
+    <div class="content-wrapper">
+        <h2>Get Caption</h2>
+        <p></p>
+        <img src="{{ url_for('static', filename='./show_as_website/images/test.jpg',_t=val1)}}"  width="500" height="400" alt="image get lost TAT"/>
+        </br></br>
+        <front size ="3">{{text_clear}}</front></br></br>
+
+        <form action ='' method='post' enctype=multipart/form-data>
+            <div id="bool" style="background-color:#2ab0b9;clear:both;text-align:center;"></div></br>
+            <form action="" method=post enctype=multipart/form-data>
+            <input class="button button2" type=file name=file>
+            <!-- beam size-->
+            <div class="button button2">
+                <input placeholder="Beamsize"id="beam" type="text" list="   beam_list" name=BEAM>
+                <datalist id="beam_list"></datalist>
+            </div>
+            <input class="button button2" type=submit value=Resubmit formmethod=post ></br></br> 
+        </form>
+
+        <button type="submit"  onclick="log_feedback('good_f')" class="button button2" id = "good_f"> good</button>
+        <button type="submit"  onclick="log_feedback('bad_f')" class="button button2" id = "bad_f"> bad</button> 
+        </br></br></br></br>
+</section>
+
+
+<!-- show internal network -->
+<section id="section2" class="cd-section">
+    <div class="content-wrapper">
+        </br><h2>Internals</h2></br>
+     
+        <!-- show image, CNN internal and RNN internal -->
+        <div class="left">
+            <img src="{{ url_for('static', filename='./show_as_website/images/test.jpg',_t=val1)}}"  width="500" height="500" alt="image get lost TAT"/>
+        </div>
+        <div class="right">
+            <button onclick="expand_button('CNN_vis')" class="button button2">Vis CNN</button>
+            <button onclick="expand_button('RNN_vis')" class="button button2">Vis RNN</button></br></br>
+        
+            <div id="bool" style="background-color:#2ab0b9;text-align:center;"></div>
+            <div id="CNN_vis" style='display:none'>
+                <div id="imgbox"></div>
+            </div>
+
+            <div id="RNN_vis" style='display:none'>
+                <div id="attention1"></div>
+                <div id="attention2"></div>
+                <div>
+                    {% for i in range(length) %}
+                    <button class="word"><a href="www.google.com">{{text[i]}}</a></button>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+        <div></div>
+            
+        <!-- Show similar imags and caption-->
+        <button stype="clear:both" onclick="expand_button('similar')" class="button button2">Show similar images</button>
+        <button onclick="expand_button('similar_cap')" class="button button2">Show corresponding caption</button></br>
+        <div id="bool" style="background-color:#2ab0b9;clear:both;text-align:center;"></div>
+
+        <div id="similar"></div>
+        <div id='similar_cap' style='display:none'>
+            {% for item in cap_list %}
+            <textarea class="word1">{{item}}</textarea>
+            {% endfor %}
+        </div>
+        <br/>
+
+        <!--show word frequency and part of speech of specifi cluster-->
+        <front size = "10">The number of total used words is {{words_num}}, and the distinct word is {{words_cat}}; the tag number is {{tag_num}}.</front></br></br>
+        <button onclick="expand_button('pie1')" class="button button2">Words distribution in similar cluster</button>
+        <button onclick="expand_button('pie2')" class="button button2">Tag distribution of used words</button></br></br>
+                <div id="pie1" style='display:none;'></div>
+                    <script type="module">
+                    // Load the Observable runtime and inspector.
+                    import {Runtime, Inspector} from "https://cdn.jsdelivr.net/npm/@observablehq/runtime@4/dist/runtime.js";
+                    // Your notebook, compiled as an ES module.
+                    import notebook from "https://api.observablehq.com/@yq605879396/pie-chart.js?v=3";
+                    // Load the notebook, observing its cells with a default Inspector
+                    // that simply renders the value of each cell into the provided DOM node.
+                    // new Runtime().module(notebook, Inspector.into(document.body));
+                    new Runtime().module(notebook, name => {
+                      if (name === "pie1_chart") {
+                        return new Inspector(document.querySelector("#pie1"));
+                      }
+                    });
+                    </script>
+                <div id="pie2" style='display:none;'></div>
+                    <script type="module">
+                    import {Runtime, Inspector} from "https://cdn.jsdelivr.net/npm/@observablehq/runtime@4/dist/runtime.js";
+                    import notebook from "https://api.observablehq.com/@yq605879396/pie-chart/2.js?v=3";
+                    new Runtime().module(notebook, name => {
+                      if (name === "pie2_chart") {
+                        return new Inspector(document.querySelector("#pie2"));
+                      }
+                    });
+                    </script>
+
+        <div id="bool" style="background-color:#2ab0b9;clear:both;text-align:center;"></div>       
+    </div>
+</section>
+
+
+<!-- Analysis -->
+<section id="section3" class="cd-section">
+    <div class="content-wrapper">
+        <h2>Analysis</h2>
+        <p>Tha statistics of all captions we generated on Fliker8k</p></br>
+        <button onclick="expand_button('bubble')" class="button button2">Captions' Length</button>
+        <button onclick="expand_button('burst')" class="button button2">Words in Captions </button>
+        </br></br></br>
+
+        <!-- draw bubble chart-->
+        <div id = "bubble" style='display:none'>
+            <div class= "tool-tip"></div>
+            <div id="bubble_chart"></div>
+                <script type="module">
+                import {Runtime, Inspector} from "https://cdn.jsdelivr.net/npm/@observablehq/runtime@4/dist/runtime.js";
+                import notebook from "https://api.observablehq.com/@yq605879396/artsed-bubble.js?v=3";
+                new Runtime().module(notebook, name => {
+                  if (name === "bubble_chart") {
+                    return new Inspector(document.querySelector("#bubble_chart"));
+                  }
+                });
+                </script>
+        </div>
+
+        <!-- draw burst chart-->
+        <div class = 'burst_div' id = "burst"  style='display:none;width:650px;height:650px; MARGIN-RIGHT:auto; MARGIN-LEFT:auto' >          
+            <script type="module">
+            import {Runtime, Inspector} from "https://cdn.jsdelivr.net/npm/@observablehq/runtime@4/dist/runtime.js";
+            import notebook from "https://api.observablehq.com/@yq605879396/zoomable-sunburst/2.js?v=3";
+            new Runtime().module(notebook, name => {
+              if (name === "burst_chart") {
+                return new Inspector(document.querySelector("#burst"));
+              }
+            });
+            </script>
+        </div>
+    </div>
+</section>
+
+
+<!-- Transform image-->
+<section id="section4" class="cd-section">
+    <div class="content-wrapper">
+        </br></br></br>
+        <h2>Transform</h2>
+        <p></p>    
+
+        <!-- draw specil picture -->
+        <div id="chart1"></div></br></br>
+            <script type="module">
+            import {Runtime, Inspector} from "https://cdn.jsdelivr.net/npm/@observablehq/runtime@4/dist/runtime.js";
+            import notebook from "https://api.observablehq.com/@yq605879396/mona-lisa-histogram/2.js?v=3";
+            new Runtime().module(notebook, name => {
+              if (name === "chart") {
+                return new Inspector(document.querySelector("#chart1"));
+              }
+            });
+            </script>
+
+        <button onclick="displayLoc()"class="button button 2">Mask</button>
+        <button onclick="update_img()"class="button button 2">Update</button>
+        <button onclick="expand_button('generate')" class="button button2">Show caption</button></br></br></br>
+
+        <img src="{{ url_for('static', filename='./show_as_website/images/test.jpg',_t=val1)}}"  width="600" height="400" alt="image get lost TAT" id="new_img"/> </br>
+
+        <div id='generate' style='display:none'>                
+            </br>
+            <p id="new_caption">{{generated_seq}}</p>
+        </div> </br>
+    </div>
+</section>
+
+
+<!-- feed back -->
+<section id="section5" class="cd-section">
+    <div class="content-wrapper">
+        <h2>Contact</h2>
+        <p> Thank you for your effort.</p>
+        <input type="txt"  rows="4" cols="60" placeholder="Please chime in here with your thoughts ^^/" name='username' style="height:38px;width:480px;">
+    </div>
+</section>
+
+    
+</body>
+</html>
+
+
+<script type="text/javascript">
+var html = "";
+var temp1 = "/static/features/";
+var temp2 = ".jpg";
+
+for (var i=1;i<3;i++){
+    for (var j=1;j<9;j++){
+        var temp3 = (i-1)*8 + j;
+        html+='<img src="'+temp1+temp3+temp2+'" width="80" height="80" alt="image get lost TAT"/>';
+        html += '<a>  </a>';
+    }
+    html += '<br/>';
+}
+
+document.getElementById("imgbox").innerHTML=html;
+</script>
+
+
+<script type="text/javascript">
+var html = "";
+var temp1 = "/static/attention/applied_";
+var temp4 = "/static/attention/origin_";
+var temp2 = ".jpg";
+var len = {{length}};
+
+for (var i=0;i<len;i++){
+    var temp3 = i;
+    html += '<img src="'+temp4+temp3+temp2+'" width="100" alt="image get lost TAT"/>';
+}
+
+html += '<br/>';
+
+document.getElementById("attention1").innerHTML=html;
+</script>
+
+
+<script type="text/javascript">
+var html = "";
+var temp1 = "/static/attention/applied_";
+var temp4 = "/static/attention/origin_";
+var temp2 = ".jpg";    
+var len = {{length}};
+
+for (var i=0;i<len;i++){
+    var temp3 = i;
+    html += '<img src="'+temp1+temp3+temp2+'" width="100" alt="image get lost TAT"/>';
+
+}
+html += '<br/>';
+
+document.getElementById("attention2").innerHTML=html;
+</script>
+
+
+<script type="text/javascript">
+var html = "";
+var temp1 = "/static/show_as_website/images/";
+var temp2 = ".jpg"
+
+for (var i=0;i<5;i++){
+    html += '<img src="' + temp1+i+temp2+'" width="220" height="220" alt="image get lost TAT"/>';
+    html += '<a>  </a>';
+}
+html += '<br/>';
+
+document.getElementById("similar").innerHTML=html;
+document.getElementById("similar").style.display = 'none';
+</script>
+
+
+<script type="text/javascript">
+
+//log feedback    
+function log_feedback(id){
+    if (id == 'good_f') {
+        alert("Thank you for your feedback - 'Good caption.'");  
+        console.log("User think it is a good caption.")
+    }
+    else if (id == 'bad_f') {
+        alert("Thank you for your feedback - 'Bad caption.'");
+        console.log("User think it is a bad caption.")
+    }
+}
+
+// after transform image, update new image and new caption
+function update_img(){
+    $('#new_img').hide().attr('src', "http://127.0.0.1:5000/vis/generated_test.jpg"+"?t="+Math.random());
+    $('#new_img').show()
+
+    var htmlobj=$.ajax({url:"http://127.0.0.1:5000/vis/caption",async:false});
+    document.getElementById('new_caption').innerText = htmlobj.responseText;
+
+}
+
+// click button, display something, click again something disappear
+function expand_button(id){
+    if (document.getElementById(id).style.display == 'none') {
+        document.getElementById(id).style.display = 'block';
+    }
+    else if (document.getElementById(id).style.display == 'block') {
+        document.getElementById(id).style.display = 'none';
+    }
+}
+
+
+//added for transform image 
+function displayLoc()
+{
+    var elements = document.getElementById("chart1");
+    var elems = elements.getElementsByClassName("selection");
+    var target_rect = elements.getElementsByTagName("rect");
+    var target_canvas = elements.getElementsByTagName("canvas")
+    
+    
+    var params={};
+      params.x=target_rect[1].getAttribute("x");
+      params.y=target_rect[1].getAttribute("y");
+      params.width=target_rect[1].getAttribute("width");
+      params.height=target_rect[1].getAttribute("height");
+      params.canvas_w =target_canvas[0].getAttribute("width")
+      params.canvas_h =target_canvas[0].getAttribute("height")
+      //alert(params);
+    
+    var targetUrl = "http://127.0.0.1:5000/home";
+    $.ajax({
+        type:'GET',
+        url:targetUrl,
+        data:params,
+        datatype:'args',               //make sure that -> result=true, then execute return result;
+        success:function(data){
+          if(data.result=='SUCCESS'){
+            //window.location.href="http://127.0.0.1:5000/home/";
+            //alert("yeah!!");
+          }else{
+            //alert("no!!");
+          }
+        }
+      });
+
+}
+</script>
+
+
+

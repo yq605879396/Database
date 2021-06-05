@@ -1,0 +1,467 @@
+<!doctype html>
+<html lang="en" class="no-js">
+<head>
+    
+<META HTTP-EQUIV="pragma" CONTENT="no-cache">
+<META HTTP-EQUIV="Cache-Control" CONTENT="no-cache, must-revalidate">
+<META HTTP-EQUIV="expires" CONTENT="Wed, 26 Feb 1997 08:21:57 GMT">
+<META HTTP-EQUIV="expires" CONTENT="0">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!--front style -->
+    <link href="https://fonts.googleapis.com/css2?family=Nunito:ital,wght@0,400;1,900&display=swap" rel="stylesheet">
+    <!-- custom style -->
+    <link rel="stylesheet" href="../static/css/reset.css"> <!-- CSS reset -->
+    <link rel="stylesheet" href="../static/css/style.css"> <!-- Resource style: body, html, navi -->
+    <link rel="stylesheet" href="../static/css/main.css"> <!-- some style for this page -->
+
+    <script src="../static/js/modernizr.js"></script> <!-- Modernizr -->
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+    <title>Vaccine</title>
+
+
+</head>
+
+
+<bodyonload="start()">
+
+<!-- navi -->
+<nav class="cd-vertical-nav">
+    <ul>
+        <li><a href="#section1" class="active"><span class="label">Home</span></a></li>
+        <li><a href="#section2"><span class="label">Information</span></a></li>
+        <li><a href="#section3"><span class="label">Available Time</span></a></li>
+        <li><a href="#section4"><span class="label">Matched Appoinment</span></a></li>
+        <li><a href="#section5"><span class="label">Contact</span></a></li>
+
+    </ul>
+</nav>
+
+<button class="cd-nav-trigger cd-image-replace">Open navigation<span aria-hidden="true"></span></button>
+
+<!-- Welcome patient-->
+<section id="section1" class="cd-section">
+    <div class="content-wrapper">
+        <h2>Home Page</h2>
+        <p>Welcome {{ patient_data.pname }}, you've successfully logged in!</p></br>
+
+    </div>
+</section>
+
+
+<!-- Matched information -->
+<section id="section2" class="cd-section">
+    <div class="content-wrapper">
+        
+        </br></br></br><h2>Information</h2>
+
+        <div class = "left">
+            </br>
+            <h3>Personal Information</h3></br>
+            <table boder = "5"  cellpadding="10" cellspacing="10" style="width: 70%;margin:auto; border-collapse:separate; border-spacing:0px 10px;">
+                <tr ><td style="width: 304px;"> Email: </td><td>{{ patient_data.pemail }}</td></tr>
+                <tr ><td style="width: 304px;"> Name: </td><td>{{ patient_data.pname }}</td></tr>
+                <tr ><td style="width: 304px;"> SSN: </td><td>{{ patient_data.SSN }}</td></tr>
+                <tr ><td style="width: 304px;"> Birthday: </td><td> {{patient_data['date(`birthdt`)']}}</td> </tr>
+                <tr ><td style="width: 304px;"> Address : </td><td>{{patient_data.paddress}}</td></tr>
+                <tr ><td style="width: 304px;"> Phone: </td><td>{{patient_data.pphone}}</td></tr>
+                <tr ><td style="width: 304px;"> Max Distance : </td><td>{{patient_data.madix}}</td></tr>
+                <tr ><td style="width: 304px;"> Location - x coordinate: </td><td>{{patient_data.px}}</td></tr>
+                <tr ><td style="width: 304px;"> Location - y coordinate: </td><td>{{patient_data.py}}</td></tr>
+            </table>
+        </div>
+
+        <div class="right">
+            </br>
+            <h3>Available time slot:</h3></br>
+            <table boder = "5"  cellpadding="10" cellspacing="100" front = 20px style="width: 70%;margin:auto; border-collapse:separate; border-spacing:0px 10px;">
+                <tr>
+                    <th style="width: 100px;"> 	
+                        &#127746; 	
+                        &#11088;</th>                    
+                    <th style="width: 100px;">Mon</th>
+                    <th style="width: 100px;">Tue</th>
+                    <th style="width: 100px;">Wed</th>
+                    <th style="width: 100px;">Thu</th>
+                    <th style="width: 100px;">Fri</th>
+                    <th style="width: 100px;">Sat</th>
+                    <th style="width: 100px;">Sun</th>
+                </tr>
+                <tbody>
+                    {% for i in range(6) %}
+                    <tr>
+                        <td>Block {{i+1}}</td>
+                        {% for j in range(7) %}
+                            {% if patient_data.ava and patient_data.ava[i][j] == 1%}
+                            <td>&#11088;</td>
+                            {% else %}
+                            <td>&#10060;</td>
+                            {% endif %}
+                        {% endfor %}
+                    </tr>
+                    {% endfor %}
+                </tbody>              
+            </table>
+        </div>
+        <form method="POST" action=''>
+            <table boder = "5"  cellpadding="20" cellspacing="20" style="width: 85%;margin:auto; border-collapse:separate; border-spacing:0px 10px;">
+            <tr>
+                <td style="width: 30px;"> &#127775;&nbsp; &nbsp; </td>
+                <td style="width: 80px;" front = 20px> Address: </td><td style="width: 100px;"><input type="text" name="new_address" value=""> &nbsp; &nbsp;  </td>
+                <td style="width: 30px;"> &nbsp; x: </td><td style="width: 100px;"><input type="text" name="new_px" value=""> </td>
+                <td style="width: 30px;"> &nbsp; y: </td><td style="width: 100px;"><input type="text" name="new_py" value=""> </td>
+                <td style="width: 130px;">&nbsp;  Max Distance: </td><td style="width: 100px;"><input type="text" name="new_maxdict" value=""> </td>
+                <td style="width: 120px;"><input class="button button2" type="submit" value="update"></td>
+            </table>
+        </form>    
+    </br></br>
+    </div>
+</section>
+
+
+<!-- Select available time -->
+<section id="section3" class="cd-section">
+    <div class="content-wrapper">
+       </br></br></br></br>
+        <h2>Available Time Selection</h2>
+        <p>Select your available time block - 4 hours a block, start from 12:00 pm</p></br></br>
+        <table boder = "5"  cellpadding="10" cellspacing="100" front = 20px style="width: 45%;margin:auto; border-collapse:separate; border-spacing:0px 10px;">
+            <tr >
+                <th style="width: 130px;">Mon</th>
+                <th style="width: 130px;">Tue</th>
+                <th style="width: 130px;">Wed</th>
+                <th style="width: 130px;">Thu</th>
+                <th style="width: 130px;">Fri</th>
+                <th style="width: 130px;">Sat</th>
+                <th style="width: 130px;">Sun</th>
+            </tr>
+
+            <tr>
+                <td><button class="button3" name = 'block11' onclick="select_block('block11')" >Block1</button>&nbsp;&nbsp;</td>
+                <td><button class="button3" name = 'block12' onclick="select_block('block12')" >Block1</button>&nbsp;&nbsp;</td>
+                <td><button class="button3" name = 'block13' onclick="select_block('block13')" >Block1</button>&nbsp;&nbsp;</td>
+                <td><button class="button3" name = 'block14' onclick="select_block('block14')" >Block1</button>&nbsp;&nbsp;</td>
+                <td><button class="button3" name = 'block15' onclick="select_block('block15')" >Block1</button>&nbsp;&nbsp;</td>
+                <td><button class="button3" name = 'block16' onclick="select_block('block16')" >Block1</button>&nbsp;&nbsp;</td>
+                <td><button class="button3" name = 'block17' onclick="select_block('block17')" >Block1</button>&nbsp;&nbsp;</td>
+            </tr>   
+            
+            <tr>
+                <td><button class="button3" name = 'block21' onclick="select_block('block21')" >Block2</button>&nbsp;&nbsp;</td>
+                <td><button class="button3" name = 'block22' onclick="select_block('block22')" >Block2</button>&nbsp;&nbsp;</td>
+                <td><button class="button3" name = 'block23' onclick="select_block('block23')" >Block2</button>&nbsp;&nbsp;</td>
+                <td><button class="button3" name = 'block24' onclick="select_block('block24')" >Block2</button>&nbsp;&nbsp;</td>
+                <td><button class="button3" name = 'block25' onclick="select_block('block25')" >Block2</button>&nbsp;&nbsp;</td>
+                <td><button class="button3" name = 'block26' onclick="select_block('block26')" >Block2</button>&nbsp;&nbsp;</td>
+                <td><button class="button3" name = 'block27' onclick="select_block('block27')" >Block2</button>&nbsp;&nbsp;</td>
+            </tr>   
+            
+            <tr>
+                <td><button class="button3" name = 'block31' onclick="select_block('block31')" >Block3</button>&nbsp;&nbsp;</td>
+                <td><button class="button3" name = 'block32' onclick="select_block('block32')" >Block3</button>&nbsp;&nbsp;</td>
+                <td><button class="button3" name = 'block33' onclick="select_block('block33')" >Block3</button>&nbsp;&nbsp;</td>
+                <td><button class="button3" name = 'block34' onclick="select_block('block34')" >Block3</button>&nbsp;&nbsp;</td>
+                <td><button class="button3" name = 'block35' onclick="select_block('block35')" >Block3</button>&nbsp;&nbsp;</td>
+                <td><button class="button3" name = 'block36' onclick="select_block('block36')" >Block3</button>&nbsp;&nbsp;</td>
+                <td><button class="button3" name = 'block37' onclick="select_block('block37')" >Block3</button>&nbsp;&nbsp;</td>
+            </tr>   
+
+            <tr>
+                <td><button class="button3" name = 'block41' onclick="select_block('block41')" >Block4</button>&nbsp;&nbsp;</td>
+                <td><button class="button3" name = 'block42' onclick="select_block('block42')" >Block4</button>&nbsp;&nbsp;</td>
+                <td><button class="button3" name = 'block43' onclick="select_block('block43')" >Block4</button>&nbsp;&nbsp;</td>
+                <td><button class="button3" name = 'block44' onclick="select_block('block44')" >Block4</button>&nbsp;&nbsp;</td>
+                <td><button class="button3" name = 'block45' onclick="select_block('block45')" >Block4</button>&nbsp;&nbsp;</td>
+                <td><button class="button3" name = 'block46' onclick="select_block('block46')" >Block4</button>&nbsp;&nbsp;</td>
+                <td><button class="button3" name = 'block47' onclick="select_block('block47')" >Block4</button>&nbsp;&nbsp;</td>
+            </tr>
+            
+            <tr>
+                <td><button class="button3" name = 'block51' onclick="select_block('block51');" >Block5</button>&nbsp;&nbsp;</td>
+                <td><button class="button3" name = 'block52' onclick="select_block('block52');" >Block5</button>&nbsp;&nbsp;</td>
+                <td><button class="button3" name = 'block53' onclick="select_block('block53');" >Block5</button>&nbsp;&nbsp;</td>
+                <td><button class="button3" name = 'block54' onclick="select_block('block54');" >Block5</button>&nbsp;&nbsp;</td>
+                <td><button class="button3" name = 'block55' onclick="select_block('block55');" >Block5</button>&nbsp;&nbsp;</td>
+                <td><button class="button3" name = 'block56' onclick="select_block('block56');" >Block5</button>&nbsp;&nbsp;</td>
+                <td><button class="button3" name = 'block57' onclick="select_block('block57');" >Block5</button>&nbsp;&nbsp;</td>
+            </tr>
+            
+            <tr>
+                <td><button class="button3" name = 'block61' onclick="select_block('block61');" >Block6</button>&nbsp;&nbsp;</td>
+                <td><button class="button3" name = 'block62' onclick="select_block('block62');" >Block6</button>&nbsp;&nbsp;</td>
+                <td><button class="button3" name = 'block63' onclick="select_block('block63');" >Block6</button>&nbsp;&nbsp;</td>
+                <td><button class="button3" name = 'block64' onclick="select_block('block64');" >Block6</button>&nbsp;&nbsp;</td>
+                <td><button class="button3" name = 'block65' onclick="select_block('block65');" >Block6</button>&nbsp;&nbsp;</td>
+                <td><button class="button3" name = 'block66' onclick="select_block('block66');" >Block6</button>&nbsp;&nbsp;</td>
+                <td><button class="button3" name = 'block67' onclick="select_block('block67');" >Block6</button>&nbsp;&nbsp;</td>
+            </tr>
+            
+
+        </table>
+        </br></br>
+        <button class="button button2" name = 'update_ava' onclick="update_ava()" > update</button>
+
+        </br></br></br></br>
+    </div>
+</section>
+
+
+<!-- Matched information -->
+<section id="section4" class="cd-section">
+    <div class="content-wrapper">
+        </br></br></br></br>
+        <h2>Matched appointments</h2>
+        <p></p>
+        <table boder = "5"  cellpadding="10" cellspacing="100" front = 10px  style="width: 90%;margin:auto; border-collapse:separate; border-spacing:0px 10px;">
+            <tr >
+                <th style="width: 100px;">Company</th>
+                <th style="width: 230px;">Contact Number</th>
+                <th style="width: 230px;">Address</th>
+                <th style="width: 100px;">Distance</th>
+                <th style="width: 110px;">Appoint ID</th>
+                <th style="width: 150px;">Date</th>
+                <th style="width: 130px;">Time</th>
+                <th style="width: 150px;">Offer Date</th>
+                <th style="width: 150px;">Deadline Date</th>
+                <th style="width: 150px;">Status</th>
+                <th style="width: 70px;">Action</th>
+                <th style="width: 120px; text-align:left;"> &#x2728; </th>
+            </tr>
+        </table>    
+        <div style="max-height: 600px; overflow-y: scroll;">
+        <table boder = "5"  cellpadding="10" cellspacing="100" front = 10px  style="width: 90%;margin:auto; border-collapse:separate; border-spacing:0px 10px;">
+            <tr >
+                <th style="width: 100px;"></th>
+                <th style="width: 230px;"></th>
+                <th style="width: 230px;"></th>
+                <th style="width: 100px;"></th>
+                <th style="width: 150px;"></th>
+                <th style="width: 150px;"></th>
+                <th style="width: 130px;"></th>
+                <th style="width: 150px;"></th>
+                <th style="width: 150px;"></th>
+                <th style="width: 150px;"></th>
+                <th style="width: 70px;"></th>
+                <th style="width: 120px; text-align:left;"> </th>
+            </tr>
+            {% if patient_data.app %}
+                {% for match in patient_data.app %}
+                <tr>
+                    {% for attr in ['pvname', 'pvphone', 'pvaddress', 'dist','apid', 'date(`date`)', 'time', 'date(`offerdt`)', 'date(`deadlinedt`)', 'status' ] %}
+                        {%if attr == 'status'%} 
+                            {% if (not match[attr] or match[attr] == 'null') and match['show'] == 'Yes' %}
+                                <td>Waiting Response</td>
+                            {%else%}
+                                <td>{{match[attr]}}</td> 
+                            {% endif %}
+
+                            {% if match['show'] == 'No'%}
+                                <td> -END-</td>
+                            {% elif match['status'] == 'accept'%}
+                                <td><button class="button3" name = "canmatch" onclick ="decline_m('{{match['apid']}}')">Cancel</button></td>
+                            {% elif match['status'] == 'decline'%}
+                                <td> -END-</td>
+                            {% else %}
+                                <td>
+                                <div class="dropdown">
+                                    <button class="dropbtn">Choose</button>
+                                    <div class="dropdown-content">
+                                     <a href="javascript:accept_m('{{match['apid']}}');" name = 'accept' >Accept</a>
+                                     <a href="javascript:decline_m('{{match['apid']}}');"  name = 'decline'>Decline</a>
+                                    </div>
+                                </div>
+                                </td>
+                            {% endif%}
+                        {%else%}
+                            <td>{{match[attr]}}</td>
+                        {%endif%}
+                    {% endfor %}
+                </tr>
+                {% endfor %}
+                <tr><td> &nbsp;&nbsp;&nbsp;</td><td></td></tr>
+                <tr><td> &nbsp;&nbsp;&nbsp;</td><td></td></tr>
+            {%endif%}
+        </table>
+        </div>
+
+        </br></br></br></br>
+        <style>
+            /* 下拉按钮样式 */
+            .dropbtn {
+                border-radius:8px;
+                font-family:'Nunito', sans-serif;
+                background-color: #ce83a2; /* Purple */
+                border: none;
+                color: rgb(241, 231, 231);
+                padding: 7px 11px;
+                text-align: center;
+                text-decoration: none;
+                display: inline-block;
+                font-size: 13px;
+                cursor: pointer;
+            }
+
+            /* 容器 <div> - 需要定位下拉内容 */
+            .dropdown {
+                position: relative;
+                display: inline-block;
+            }
+
+            /* 下拉内容 (默认隐藏) */
+            .dropdown-content {
+                border-radius:8px;
+                display: none;
+                position: absolute;
+                background-color: #d18296;
+                margin-top:-35px;
+                margin-left:65px;
+                min-width: 14px;
+                font-size: 13px;
+                box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+            }
+
+            /* 下拉菜单的链接 */
+            .dropdown-content a {
+                border-radius:8px;
+                color: rgb(238, 208, 215);
+                padding: 14px 11px;
+                text-decoration: none;
+                display: block;
+            }
+
+            /* 鼠标移上去后修改下拉菜单链接颜色 */
+            .dropdown-content a:hover {background-color: #d395a2}
+            
+            /* 在鼠标移上去后显示下拉菜单 */
+            .dropdown:hover {
+                display: block;
+                box-shadow: 6px 10px 12px 6px rgba(0,0,0,0.24),5px 12px 12px 12px rgba(187, 23, 59, 0.19);
+            }
+            /* 在鼠标移上去后显示下拉菜单 */
+            .dropdown:hover .dropdown-content {
+                display: block;
+                box-shadow: 6px 10px 12px 6px rgba(0,0,0,0.24),5px 12px 12px 12px rgba(187, 23, 59, 0.19);
+            }
+
+            /* 当下拉内容显示后修改下拉按钮的背景颜色 */
+            .dropdown:hover .dropbtn {
+                background-color: hsl(354, 51%, 78%);
+            }
+            </style>
+        </div>
+    </div>
+</section>
+
+
+<!-- feed back -->
+<section id="section5" class="cd-section">
+	<div class="content-wrapper">
+		<h2>Contact</h2>
+		<p> Thank you for choosing our platform.</p>
+    <p>   Tel &#128222;:3472044355  &nbsp;&nbsp;&nbsp;   Email &#128231;: contact@gmail.com</p>
+    </div>
+</section>
+    
+</body>
+
+
+<script type="text/javascript">
+
+// select blockto_mod
+function select_block(name){
+    //document.getElementsByName(name)[0].innerHTML += '\u2B50';
+    i = Number(name[4]);
+    j = Number(name[5]);
+    //console.log({{ava}} );
+    if (document.getElementsByName(name)[0].innerHTML.length == 6){
+        document.getElementsByName(name)[0].innerHTML += '\u2B50';
+    }    
+    else{
+        document.getElementsByName(name)[0].innerHTML = document.getElementsByName(name)[0].innerHTML.substring(0, 6);
+
+    }
+
+
+}
+
+//send new availabilities 
+function update_ava()
+{
+    var params={};
+    var new_ava = new Array();
+    for (i = 0; i < 6; i ++){
+        for(j = 0; j < 7; j++){
+            if ( document.getElementsByName("block"+(i+1)+(j+1))[0].innerHTML.indexOf('\u2B50') != -1){
+                new_ava.push(String(i)+ String(j))
+            }
+        }
+    }
+    // console.log(new_ava);
+    params.new_ava = JSON.stringify(new_ava)
+    params.mode = "availability"
+    console.log(new_ava);
+    console.log(JSON.stringify(new_ava));
+    var targetUrl = "http://127.0.0.1:5000/patient_main/" + "{{ patient_data.url }}";
+
+    $.ajax({
+        type:'GET',
+        url:targetUrl,
+        data:params,
+        datatype:'args',               //make sure that -> result=true, then execute return result;
+        success:function(data){
+          window.location.href="http://127.0.0.1:5000/patient_main/" + "{{patient_data.url}}";
+          alert("Yay!! Update successfully!"); 
+        }
+      });
+
+}
+
+
+//accept_apid 
+function accept_m(apid)
+{
+    var params={};
+    params.mode = "match"
+    params.action = 'accept'
+    params.apid = apid
+    var targetUrl = "http://127.0.0.1:5000/patient_main/" + "{{ patient_data.url }}";
+    $.ajax({
+        type:'GET',
+        url:targetUrl,
+        data:params,
+        datatype:'args',               //make sure that -> result=true, then execute return result;
+        success:function(data){
+          window.location.href="http://127.0.0.1:5000/patient_main/" + "{{patient_data.url}}";
+          alert("Yay!! Update successfully!"); 
+        }
+      });
+}
+
+//decline match 
+function decline_m(apid)
+{
+    var params={};
+    params.mode = "match"
+    params.action = 'decline';
+    params.apid = apid;
+    console.log("here");
+    console.log(params);
+    var targetUrl = "http://127.0.0.1:5000/patient_main/" + "{{ patient_data.url }}";
+    $.ajax({
+        type:'GET',
+        url:targetUrl,
+        data:params,
+        datatype:'args',               //make sure that -> result=true, then execute return result;
+        success:function(data){
+          window.location.href="http://127.0.0.1:5000/patient_main/" + "{{patient_data.url}}";
+          alert("Yay!! Update successfully!"); 
+
+        }
+      });
+
+}
+
+</script>
+
+</html>

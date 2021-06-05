@@ -1,0 +1,96 @@
+<!doctype html>
+<html lang="en" class="no-js">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <!--front style -->
+  <link href="https://fonts.googleapis.com/css2?family=Nunito:ital,wght@0,400;1,900&display=swap" rel="stylesheet">
+  <!-- custom style -->
+	<link rel="stylesheet" href="../static/css/reset.css"> <!-- CSS reset -->
+	<link rel="stylesheet" href="../static/css/style.css"> <!-- Resource style: body, html, navi -->
+  <link rel="stylesheet" href="../static/css/main.css"> <!-- some style for this page -->
+
+
+  <!--script data-semver="1.6.4" src="http://code.angularjs.org/1.6.4/angular.js" data-require="angular.js@1.6.x"></script-->
+  <script src="../static/js/modernizr.js"></script> <!-- Modernizr -->
+  <title>Vaccine System</title>
+  
+</head>
+
+<body>
+
+<!-- nav -->
+<nav class="cd-vertical-nav">
+	<ul>
+		<li><a href="#section1" class="active"><span class="label">Start</span></a></li>
+		<li><a href="#section2"><span class="label">Login</span></a></li>
+		<li><a href="#section3"><span class="label">FeedBack</span></a></li>
+	</ul>
+</nav>
+
+<button class="cd-nav-trigger cd-image-replace">Open navigation<span aria-hidden="true"></span></button>
+
+
+<!-- Welcome -->
+<section id="section1" class="cd-section">
+	<div class="content-wrapper">
+		<h1>Welcome to VaccSystem</h1>
+    <p> Let's get vaccinated.</p>
+		<a href="#section2" class="cd-scroll-down cd-image-replace">scroll down</a>
+	</div>
+</section>
+
+
+<!-- Login window -->
+<section id="section2" class="cd-section">
+	<div class="content-wrapper">
+    </br></br>
+		<h2>Login</h2>
+		<p>Please input your username and password.</p>
+
+    </br></br>
+
+    <form action='' method='POST' enctype=multipart/form-data>
+      <div class="button button2">
+        <input placeholder="username" id="username" type="text" name= "usn">
+      </div>
+      <div class="button button2">
+      <input placeholder="password" id="password" type="text" name= "pwd">
+      </div>
+      <input class="button button2" type=submit value=Login></br></br> 
+    </form>
+
+    </br></br>
+    {% with messages = get_flashed_messages() %}
+    {% if messages %}
+      <ul class="flashes">
+         {% for message in messages %}
+          <div class="message_flash">{{ message }}</div>
+         {% endfor %}
+      </ul>
+    {% endif %}
+    {% endwith %} 
+
+    <p>No account? Please click button below to register.</p></br>
+
+    <button  class="button button2" name= 'provider_reg' onclick="window.location.href=('/reg_provider')">Provider</button>    
+    <button  class="button button2" name= 'patient_reg' onclick="window.location.href=('/reg_patient')">Patient</button>
+    </br></br>   
+  </br></br>   
+
+	 </div>
+</section>
+
+
+<!-- feed back -->
+<section id="section3" class="cd-section">
+	<div class="content-wrapper">
+		<h2>Contact</h2>
+		<p> Thank you for choosing our platform.</p>
+    <p>   Tel &#128222;:3472044355  &nbsp;&nbsp;&nbsp;   Email &#128231;: contact@gmail.com</p>
+    </div>
+</section>
+
+</body>
+</html>
