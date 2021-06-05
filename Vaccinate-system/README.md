@@ -39,17 +39,17 @@ we need to run two files
 
 ## Some screen shots
 
-<img src="https://github.com/yq605879396/Database/blob/main/Vaccinate-system/images/login.png" width="800" height="400" /> 
-<img src="https://github.com/yq605879396/Database/blob/main/Vaccinate-system/images/Patient-Regis.png" width="800" height="400" /> 
-<img src="https://github.com/yq605879396/Database/blob/main/Vaccinate-system/images/Patient-Home.png" width="800" height="400" /> 
-<img src="https://github.com/yq605879396/Database/blob/main/Vaccinate-system/images/Patient%20Information.png" width="800" height="400" /> 
-<img src="https://github.com/yq605879396/Database/blob/main/Vaccinate-system/images/Patient-Availability.png" width="800" height="400" />
-<img src="https://github.com/yq605879396/Database/blob/main/Vaccinate-system/images/Patient-Maching.png" width="800" height="400" /> 
+<img src="https://github.com/yq605879396/Database/blob/main/Vaccinate-system/images/login.png" width="1000" height="500" /> 
+<img src="https://github.com/yq605879396/Database/blob/main/Vaccinate-system/images/Patient-Regis.png" width="1000" height="500" /> 
+<img src="https://github.com/yq605879396/Database/blob/main/Vaccinate-system/images/Patient-Home.png" width="1000" height="500" /> 
+<img src="https://github.com/yq605879396/Database/blob/main/Vaccinate-system/images/Patient%20Information.png" width="1000" height="500" /> 
+<img src="https://github.com/yq605879396/Database/blob/main/Vaccinate-system/images/Patient-Availability.png" width="1000" height="500" />
+<img src="https://github.com/yq605879396/Database/blob/main/Vaccinate-system/images/Patient-Maching.png" width="1000" height="500" /> 
 
-<img src="https://github.com/yq605879396/Database/blob/main/Vaccinate-system/images/Provider-Regis.png" width="800" height="400" /> 
-<img src="https://github.com/yq605879396/Database/blob/main/Vaccinate-system/images/Provider-Main.png" width="800" height="400" /> 
-<img src="https://github.com/yq605879396/Database/blob/main/Vaccinate-system/images/Provider-Information.png" width="800" height="400" /> 
-<img src="https://github.com/yq605879396/Database/blob/main/Vaccinate-system/images/Provider-History%20Appointment.png" width="800" height="400" /> 
+<img src="https://github.com/yq605879396/Database/blob/main/Vaccinate-system/images/Provider-Regis.png" width="1000" height="500" /> 
+<img src="https://github.com/yq605879396/Database/blob/main/Vaccinate-system/images/Provider-Main.png" width="1000" height="500" /> 
+<img src="https://github.com/yq605879396/Database/blob/main/Vaccinate-system/images/Provider-Information.png" width="1000" height="500" /> 
+<img src="https://github.com/yq605879396/Database/blob/main/Vaccinate-system/images/Provider-History%20Appointment.png" width="1000" height="500" /> 
 <img src="https://github.com/yq605879396/Database/blob/main/Vaccinate-system/images/Provider-Matching.png" width="1000" height="500" />
 
 
